@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  tabby-analysis:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # 为容器指定一个固定的名称，方便管理
+    container_name: tabby-analysis-container
+    # restart: unless-stopped
+    user: "7474:7474"
+    environment:
+      # Neo4j 数据库的认证信息，用于首次启动时设置密码
+      - NEO4J_AUTH=neo4j/password
+      # 下面这两个变量是为 start.sh 脚本中的 cypher-shell 准备的
+      - Tabby_NEO4J_USER=neo4j
+      - Tabby_NEO4J_PASSWORD=password
+      # Java 虚拟机参数，可以根据您机器的性能进行调整
+      - JAVA_OPTS=-Xmx4g -Xms2g -XX:+UseG1GC
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      # 您需要把待分析的代码放在 source_code_to_analyze 目录中
+      - ./pvc/source:/app/tabby/source
+      # 【输出】将容器内生成的报告持久化到主机的 reports 目录
+      - ./pvc/reports:/app/reports
+      # 【输出】将 Tabby 的分析结果持久化到主机的 output 目录
+      - ./pvc/output:/app/tabby/output
+      - neo4j_data:/var/lib/neo4j/data
+
+# 定义顶层卷
+volumes:
+  neo4j_data:

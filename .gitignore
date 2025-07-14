@@ -1,0 +1,12 @@
+# Docker and local environment
+.DS_Store
+.env
+*.log
+
+# Folders managed by Docker Compose volumes
+# Do not commit the code being analyzed or the output results
+
+# IDE-specific files
+.idea/
+.vscode/
+*.swp

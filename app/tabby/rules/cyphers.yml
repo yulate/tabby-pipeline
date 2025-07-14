@@ -1,0 +1,179 @@
+---
+name: "netty_to_serialize"
+type: "netty"
+source:
+  type: "source"
+  nettyEndpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "SERIALIZE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists:
+  - "io.netty.handler.codec.serialization.ObjectDecoder#decode"
+  - "io.netty.handler.codec.http.websocketx.WebSocketProtocolHandler#decode"
+  - "io.netty.handler.codec.LengthFieldBasedFrameDecoder#decode"
+  - "io.netty.handler.codec.ByteToMessageDecoder#channelRead"
+  - "io.netty.channel.ChannelInboundHandlerAdapter#channelRead"
+  - "io.netty.handler.codec.ByteToMessageCodec#channelRead"
+  - "io.netty.handler.codec.haproxy.HAProxyMessageDecoder#channelRead"
+  - "io.netty.handler.codec.http2.Http2MultiplexCodec#channelRead"
+  - "io.netty.handler.codec.marshalling.MarshallingDecoder#decode"
+  - "io.netty.handler.codec.dns.TcpDnsResponseDecoder#decode"
+  - "io.netty.handler.codec.dns.TcpDnsQueryDecoder#decode"
+pathBlacklists:
+  - "java.lang.Iterable#iterator"
+  - "java.util.Iterator#hasNext"
+  - "java.util.Map$Entry#getValue"
+  - "java.lang.Object#equals"
+  - "java.lang.Thread#run"
+  - "java.util.Map#put"
+  - "java.util.List#contains"
+---
+name: "web_to_code"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "CODE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists: []
+---
+name: "web_to_exec"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "EXEC"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists: []
+---
+name: "web_to_file"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "FILE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists:
+  - "java.io.InputStream#read"
+  - "java.io.Writer#write"
+  - "java.io.File#delete"
+---
+name: "web_to_file_write"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "FILE_WRITE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists:
+  - "java.io.PrintWriter#write"
+  - "java.io.Writer#write"
+  - "java.io.OutputStream#write"
+  - "java.io.InputStream#read"
+---
+name: "web_to_serialize"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "SERIALIZE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists:
+  - "java.util.List#contains"
+---
+name: "web_to_sqli"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "SQLI"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists:
+  - "java.sql.Connection#isClosed"
+---
+name: "web_to_ssrf"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "SSRF"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists:
+  - "java.io.InputStream#read"
+  - "java.io.OutputStream#write"
+---
+name: "web_to_xxe"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "XXE"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists: []
+---
+name: "web_to_jndi"
+type: "web"
+source:
+  type: "source"
+  endpoint: true
+sink:
+  type: "sink"
+  sink: true
+  vul: "JNDI"
+depth: 8
+limit: 10
+procedure: "tabby.beta.findPath"
+sourceBlacklists: []
+pathBlacklists: []
